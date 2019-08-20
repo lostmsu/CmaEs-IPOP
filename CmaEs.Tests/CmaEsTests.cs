@@ -7,8 +7,7 @@ using System.Diagnostics;
 
 namespace CMAESReduxTest
 {
-    
-    
+
     /// <summary>
     ///This is a test class for CMAESTest and is intended
     ///to contain all CMAESTest Unit Tests

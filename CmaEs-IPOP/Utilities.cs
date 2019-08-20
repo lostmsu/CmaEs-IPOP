@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Accord.Math.Decompositions;
 using Meta.Numerics.Matrices;
 using Meta.Numerics;
-using Accord.Math.Decompositions;
 using Meta.Numerics.Statistics.Distributions;
 
 namespace SteveBagnall.CmaEs_IPOP
@@ -317,42 +317,8 @@ namespace SteveBagnall.CmaEs_IPOP
 			return maxIterations;
 		}
 
-		/// <summary>
-		/// Uses Meta.Numerics - fails with large matrices
-		/// Eig(matrix, out eigenVectors, out eigenValues) produces matrices of eigenvalues and eigenvectors of matrix, 
-		/// so that matrix*eigenVectors = eigenVectors*eigenValues. 
-		/// Matrix eigenValues is the canonical form of matrix — a diagonal matrix with matrix's eigenvalues on the main diagonal. 
-		/// Matrix eigenVectors is the modal matrix — its columns are the eigenvectors of matrix.
-		/// </summary>
-		/// <param name="matrix"></param>
-		/// <param name="eigenVectors"></param>
-		/// <param name="eigenValues"></param>
-		public static void EigMetaNumerics(SquareMatrix matrix, out SquareMatrix eigenVectors, out SquareMatrix eigenValues)
-		{
-			if (!(Utilities.IsSymmetrical(matrix)))
-				throw new ApplicationException("Matrix must be symmetrical.");
 
-			var system = matrix.Eigensystem();
-
-			eigenVectors = new SquareMatrix(system.Dimension);
-			eigenValues = new SquareMatrix(system.Dimension);
-
-			for (int i = 0; i < system.Dimension; i++)
-			{
-				int r = 0;
-				foreach (Complex vector in system.Eigenvector(i))
-				{
-					eigenVectors[r, i] = (double.IsNaN(vector.Re)) ? 0.0 : vector.Re;
-					r++;
-				}
-
-				double eValue = system.Eigenvalue(i).Re;
-				eigenValues[i, i] = (double.IsNaN(eValue)) ? 0.0 : eValue;
-			}
-		}
-
-
-		public static ColumnVector Sort(ColumnVector vector, out int[] originalIndices)
+        public static ColumnVector Sort(ColumnVector vector, out int[] originalIndices)
 		{
 			ColumnVector sorted = new ColumnVector(vector.Dimension);
 			originalIndices = new int[vector.Dimension];
@@ -505,7 +471,7 @@ namespace SteveBagnall.CmaEs_IPOP
 		/// <param name="lowerToUper">If true, the lower half is copied to the upper half, otherwise the upper half iscopied to the lower half</param>
 		public static SquareMatrix GetSymmetrical(SquareMatrix source, bool lowerToUpper = false)
 		{
-			return GetTriangle(source, 0, lowerToUpper) + GetTriangle(source, lowerToUpper ? -1 : 1, lowerToUpper).Transpose();
+			return GetTriangle(source, 0, lowerToUpper) + GetTriangle(source, lowerToUpper ? -1 : 1, lowerToUpper).Transpose;
 		}
 
 		public static SquareMatrix GetTriangle(SquareMatrix source, int diagonalIndex = 0, bool isGetLower = false)

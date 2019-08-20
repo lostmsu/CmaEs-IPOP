@@ -1,76 +1,20 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{B7DEE786-B0BF-484B-885D-4B51C60EDE35}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <NoStandardLibraries>false</NoStandardLibraries>
-    <AssemblyName>SteveBagnall.CmaEs_IPOP</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
-    <FileAlignment>512</FileAlignment>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>SteveBagnall.CmaEs_IPOP</RootNamespace>
+    <PackageId>CMAESRedux</PackageId>
+    <Authors>Steve Bagnall</Authors>
+    <Description>CMA-ES Implementation in C# with increasing population restart</Description>
+    <PackageProjectUrl>https://github.com/lostmsu/CmaEs-IPOP</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/lostmsu/CmaEs-IPOP.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>machine learning; cma-es; evolutionary strategies</PackageTags>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Accord">
-      <HintPath>..\3rdParty\Accord.dll</HintPath>
-    </Reference>
-    <Reference Include="Accord.Math">
-      <HintPath>..\3rdParty\Accord.Math.dll</HintPath>
-    </Reference>
-    <Reference Include="Accord.Math.Core">
-      <HintPath>..\3rdParty\Accord.Math.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Meta.Numerics">
-      <HintPath>..\3rdParty\Meta.Numerics.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <PackageReference Include="Accord.Math" Version="3.8.0" />
+    <PackageReference Include="Meta.Numerics" Version="4.0.7" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="CmaEs.cs" />
-    <Compile Include="CmaParams.cs" />
-    <Compile Include="CmaState.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Solution.cs" />
-    <Compile Include="StopReason.cs" />
-    <Compile Include="Utilities.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
-  <ProjectExtensions>
-    <VisualStudio AllowExistingFolder="true" />
-  </ProjectExtensions>
+
 </Project>

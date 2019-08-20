@@ -684,7 +684,7 @@ namespace CMAESReduxTest
 
 			SquareMatrix A = matrix * eigenVectors;
 			SquareMatrix B = eigenVectors * eigenValues;
-			
+
 			for (int r = 0; r < matrix.Dimension; r++)
 				for (int c = 0; c < matrix.Dimension; c++)
 					Assert.IsTrue(Math.Abs(A[r, c] - B[r, c]) < VERY_SMALL_VALUE);
@@ -694,10 +694,10 @@ namespace CMAESReduxTest
 		public void EigLargeTest()
 		{
 			SquareMatrix matrix = this.LargeTenByTenSymmetrical;
-			SquareMatrix eigenVectors = null;
-			SquareMatrix eigenValues = null;
 
-			Utilities.EigAlgLib(matrix, out eigenVectors, out eigenValues, 1, isGetLower: false);
+			Utilities.EigAlgLib(matrix,
+				out var eigenVectors, out SquareMatrix eigenValues,
+				maxIterations: 1, isGetLower: false);
 
 			SquareMatrix A = matrix * eigenVectors;
 			SquareMatrix B = eigenVectors * eigenValues;
